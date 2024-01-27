@@ -38,9 +38,10 @@ def get_party(case_title):
 
 def gpt_answer(question):
     max_retries = 3
+    model="gpt-3.5-turbo-1106"
     for attempt in range(max_retries):
         try:
-            client = openai.OpenAI(api_key='API_KEY')
+            client = openai.OpenAI(api_key='APIKEY')
             
             chat_completion = client.chat.completions.create(
                 messages=[
@@ -49,8 +50,9 @@ def gpt_answer(question):
                         "content": question,
                     }
                 ],
-                model="gpt-3.5-turbo-1106",
+                # model="gpt-3.5-turbo-1106",
                 # model="gpt-4-preview-1106",
+                model=model
             )
             # Extract the answer from the GPT response
             answer = chat_completion.choices[0].message.content
@@ -58,6 +60,7 @@ def gpt_answer(question):
         except Exception as e:
             print(e)
             if attempt < max_retries - 1:
+                model="gpt-4-1106-preview"
                 time.sleep(5)  # Wait for 5 seconds before retrying
             else:
                 return None
@@ -93,14 +96,14 @@ def preprocess_capstone(data):
     question = f"""
     I have a legal case description and require two distinct pieces of information:
     
-    1. Summary: Please provide a concise summary of the case, focusing on the facts and events. Exclude any information about the verdict.
+    1. Summary: Please provide a detailed summary of the case, focusing on the facts and events. Exclude any information about the verdict.
     2. Verdict: State the outcome of the case. Specify whether the plaintiff or defendant won, the penalty imposed, or in the case of a settlement, the compensation agreed upon. If the verdict is not provided, respond "unsure" only.
     
     Format your responses as follows:
     - For the summary, begin with 'Answer 1:' 
     - For the verdict, start with 'Answer 2:'
     
-    Please ensure that your total response does not exceed 2500 tokens.
+    Please ensure that your total response does not exceed 3000 tokens.
     
     Here is the description of the case:
     {case_text}
@@ -113,7 +116,7 @@ def preprocess_capstone(data):
         return None
     # print(gpt_response)
     answer1, answer2 = separate_answers(gpt_response)
-    if 'unsure' in answer2.lower() or 'verdict is not provided' in answer2.lower():
+    if 'unsure' in answer2.lower() or 'verdict is not provided' in answer2.lower() or 'sorry' in answer2.lower():
         return None
     plaintiff, defendant = get_party(data["name"])
 
@@ -124,7 +127,7 @@ def preprocess_capstone(data):
         f"Court: {data['court']['name']}\n"
         f"Plaintiff_and_attorneys: {plaintiff}\n"
         f"Defendant_and_attorneys: {defendant}\n"
-        f"Case_summarize: {answer1}\n"
+        f"Case_summary: {answer1}\n"
         f"{response_key}\n"
         f"{answer2} \n\n"
         f"{end_key}\n"
