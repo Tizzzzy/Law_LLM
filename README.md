@@ -25,6 +25,7 @@ pip install git+https://github.com/huggingface/transformers
 
 # python 3.10 or higher recommended
 pip install -r requirements.txt
+pip install pyarrow~=12.0
 
 huggingface-cli login
 ```
