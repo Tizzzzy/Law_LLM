@@ -20,8 +20,6 @@ set_seed(seed)
 # !huggingface-cli login
 login(token = "Huggingface token")
 
-# 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
-
 def load_model(model_name, bnb_config):
     n_gpus = torch.cuda.device_count()
     max_memory = f'{40960}MB'
@@ -34,7 +32,6 @@ def load_model(model_name, bnb_config):
     )
     tokenizer = AutoTokenizer.from_pretrained(model_name, use_auth_token=True)
 
-    # Needed for LLaMA tokenizer
     tokenizer.pad_token = tokenizer.eos_token
 
     return model, tokenizer
@@ -43,6 +40,7 @@ def preprocess_batch(batch, tokenizer):
     """
     Tokenizing a batch
     """
+    # print("----------------", batch.keys())
     return tokenizer(
         batch["Prompt"],
         truncation=True,
@@ -149,7 +147,8 @@ def train(model, tokenizer, dataset, output_dir):
             per_device_train_batch_size=1,
             gradient_accumulation_steps=4,
             warmup_steps=2,
-            max_steps=15,
+            # max_steps=1000,
+            num_train_epochs=1,
             learning_rate=2e-4,
             fp16=True,
             logging_steps=1,
@@ -161,8 +160,6 @@ def train(model, tokenizer, dataset, output_dir):
 
     model.config.use_cache = False  # re-enable for inference to speed up predictions for similar inputs
 
-    ### SOURCE https://github.com/artidoro/qlora/blob/main/qlora.py
-    # Verifying the datatypes before training
 
     dtypes = {}
     for _, p in model.named_parameters():
@@ -199,9 +196,10 @@ def train(model, tokenizer, dataset, output_dir):
     del trainer
     torch.cuda.empty_cache()
 
-
-def main(file_path = "capstone_prompts.csv", output_dir = "final_checkpoint"):
-    model_name = "meta-llama/Llama-2-7b-hf"
+# TODO 这里file_path改成自己的csv 确保你的数据在Prompt的column里
+def main(file_path = "", output_dir = "lawllm_checkpoint_gemma"):
+    # model_name = "meta-llama/Llama-2-7b-hf"
+    model_name = "google/gemma-7b"
     bnb_config = create_bnb_config()
     model, tokenizer = load_model(model_name, bnb_config)
     df = pd.read_csv(file_path)
