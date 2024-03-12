@@ -16,7 +16,7 @@ Once both requests are approved, follow the below directions.
 # Finetune the model
 
 ## 1. Environment preparation
-```
+```python
 git clone https://github.com/facebookresearch/llama-recipes.git
 
 cd llama-recipes
@@ -34,7 +34,7 @@ huggingface-cli login
 Once HF request to access the model has been approved, create hugging face token [here](https://huggingface.co/settings/tokens)
 
 Run below code and enter your token. It will authenticate your HF account
-```
+```python
 >>> huggingface-cli login
 
 or
@@ -46,7 +46,7 @@ or
 ## 3. Run Code
 
 Make sure you changed all the file paths and hyperparameter in the `finetune.py`, and simply run with:
-```
+```python
 python finetune.py
 ```
 
