@@ -13,6 +13,38 @@ Once both requests are approved, follow the below directions.
 
 ## 1. Preparing data for the model
 
+# Preprocess
+
+After get all of the legal data from `case.law` into a folder. In `preprocess` folder, you should run `train_test_split.py`. This will seperate your data folder into a train folder and a text folder
+
+## For Legal Judgment Prediction
+
+1. In `LJP` folder, run `gpt_preprocess.py`. This will preprocess all of the legal document in the folder and write it in a csv file. The csv file will have the format of:
+
+| File Name | Train Data |
+|-----------|------------|
+
+2. Notice that the code takes two file paths:
+   - `folder_path`:  your train folder or test folder from the `Preprocess` step.
+   - `csv_file_path`: where do you wish to store the processed data.
+
+## For Precedent Case Recommondation
+
+1. In `PCR` folder, run `precedent_get.py`. This will return a json file that contains all the processed data for PCR task.
+
+2. Notice that the code takes three file paths:
+   - `folder_path`: your train folder or test folder from the `Preprocess` step.
+   - `json_path`: where do you wish to store the processed data.
+   - `cite_path`: where do you wish to store the precedent data (Optional).
+
+## For Similar Case Retrival
+
+1. In `SCR` folder, run `SCR.py`. This will return a json file that contains all the processed data for SCR task.
+
+2. Notice that the code takes two file paths:
+   - `csv_file_path`: your processed data path from the `LJP` task.
+   - `json_train_path`: where do you wish to store the processed data.
+
 # Finetune the model
 
 ## 1. Environment preparation
