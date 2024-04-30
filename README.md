@@ -44,6 +44,16 @@ After get all of the legal data from `case.law` into a folder. In `preprocess` f
 2. Notice that the code takes two file paths:
    - `csv_file_path`: your processed data path from the `LJP` task.
    - `json_train_path`: where do you wish to store the processed data.
+  
+## Convert Three Tasks
+
+1. In `preprocess` folder, run `merge_data.py`. This will return a json file that conatins all the processed data from all tasks.
+
+2. Notice that the code takes four file paths:
+   - `LJP_file`: your data path for `LJP` task.
+   - `SCR_file`: your data path for `SCR` task.
+   - `PCR_file`: your data path for `PCR` task.
+   - `train_file`: where do you wish to store the final training data.
 
 # Finetune the model
 
