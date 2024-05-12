@@ -49,6 +49,81 @@ or
 
 ## 1. Preparing data for the model
 
+## 2. Legal Case Vector Storage with ChromaDB
+
+This project demonstrates how to store and retrieve legal case documents in a vectorized format using ChromaDB and OpenAI's embedding function. This allows for efficient similarity searches among legal case documents.
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- You have installed Python 3.8 or higher.
+- You have a running instance of ChromaDB.
+- You have an OpenAI API key to use the embedding function.
+
+## Embedding Legal Case Documents
+First, you need to convert your legal case documents into vector embeddings using OpenAI's embedding function. Here is an example of how to do this in Python:
+```python
+import openai
+
+# Load your OpenAI API key
+openai.api_key = 'your-api-key'
+
+# Function to embed a document
+def embed_document(document_text):
+    response = openai.Embedding.create(
+        input=document_text,
+        model="text-similarity-babbage-001"  # Choose the appropriate model for your use case
+    )
+    embedding = response['data'][0]['embedding']
+    return embedding
+
+# Example usage: Embedding a legal case document
+legal_case_text = "The legal case document text goes here."
+legal_case_embedding = embed_document(legal_case_text)
+```
+
+## Storing Embeddings in ChromaDB
+After you have your document embeddings, you can store them in ChromaDB. Here's a sample code snippet for storing an embedding:
+
+```python
+import chromadb
+
+# Initialize ChromaDB client
+client = chromadb.Client("your-chromadb-instance-url")
+
+# Function to store an embedding into ChromaDB
+def store_embedding(case_id, embedding):
+    # Assuming 'cases' is the collection where you want to store your embeddings
+    collection = client.collection('cases')
+    document = {
+        'id': case_id,
+        'embedding': embedding
+    }
+    collection.insert(document)
+
+# Example usage: Storing an embedding
+case_id = "123456789"  # Unique identifier for the legal case document
+store_embedding(case_id, legal_case_embedding)
+```
+
+## Querying
+To query the legal case documents by similarity, you can use the following function:
+```python
+# Function to search for similar cases
+def find_similar_cases(embedding, top_k=5):
+    search_results = client.collection('cases').find_similar(
+        embedding=embedding,
+        k=top_k
+    )
+    return search_results
+
+# Example usage: Finding similar cases
+similar_cases = find_similar_cases(legal_case_embedding)
+for case in similar_cases:
+    print(case)  # Process the search results as needed
+```
+
 # How to Run
 
 After get all of the legal data from `case.law` into a folder. In `preprocess` folder, you should run `train_test_split.py`. This will seperate your data folder into a train folder and a text folder
