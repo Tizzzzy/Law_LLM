@@ -9,11 +9,42 @@ Once request is approved, use the same email adrress to get the access of the mo
 
 Once both requests are approved, follow the below directions.
 
+# Setup
+
+## 1. Environment preparation
+```python
+git clone https://github.com/facebookresearch/llama-recipes.git
+
+cd llama-recipes
+
+pip install git+https://github.com/huggingface/transformers
+
+# python 3.10 or higher recommended
+pip install -r requirements.txt
+pip install pyarrow~=12.0
+
+huggingface-cli login
+```
+
+## 2. Authorising HF token
+Once HF request to access the model has been approved, create hugging face token [here](https://huggingface.co/settings/tokens)
+
+Run below code and enter your token. It will authenticate your HF account
+```python
+>>> huggingface-cli login
+
+or
+
+>>> from huggingface_hub import login
+>>> login(YOUR_HF_TOKEN)
+```
+
+
 # Dataset
 
 ## 1. Preparing data for the model
 
-# Preprocess
+# How to Run
 
 After get all of the legal data from `case.law` into a folder. In `preprocess` folder, you should run `train_test_split.py`. This will seperate your data folder into a train folder and a text folder
 
@@ -57,46 +88,14 @@ After get all of the legal data from `case.law` into a folder. In `preprocess` f
 
 # Finetune the model
 
-## 1. Environment preparation
-```python
-git clone https://github.com/facebookresearch/llama-recipes.git
+1. In `train` folder, run `train.py`.
+   ```bash
+   python train.py --file_path train_file.json --output_dir final_checkpoint
+   ```
+   - `file_path` is your combined training file.
+   - `output_dir` is where you wish to store your model checkpoint.
 
-cd llama-recipes
+2. If you want to modify any hyperparameters, feel free to do so.
 
-pip install git+https://github.com/huggingface/transformers
 
-# python 3.10 or higher recommended
-pip install -r requirements.txt
-pip install pyarrow~=12.0
-
-huggingface-cli login
-```
-
-## 2. Authorising HF token
-Once HF request to access the model has been approved, create hugging face token [here](https://huggingface.co/settings/tokens)
-
-Run below code and enter your token. It will authenticate your HF account
-```python
->>> huggingface-cli login
-
-or
-
->>> from huggingface_hub import login
->>> login(YOUR_HF_TOKEN)
-```
-
-## 3. Run Code
-
-Make sure you changed all the file paths and hyperparameter in the `finetune.py`, and simply run with:
-```python
-python finetune.py
-```
-
-# Prediction
-
-Once model is trained, copy your best checkpoint path and run the [predict]() to make the predictions.
-
-# Evaluation
-
-Once you save the `predictions.csv` file, run [evaluate]() to get the scores on the dataset. 
-
+If you like our project, please leave us a star
