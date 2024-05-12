@@ -1,4 +1,4 @@
-# Law_LLM
+# LawLLM: Law Large Language Model for the US Legal System
 
 ![](LawLLM.png?raw=true)
 
