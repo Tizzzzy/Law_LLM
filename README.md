@@ -1,11 +1,11 @@
 # Law_LLM
 
 # Requesting model access from META
-## 1. Requesting model access from META
-visit this [link](https://ai.meta.com/llama/) and request the access to the Llama-2 models.  
+## 1. Requesting model access from Google
+visit this [link](https://ai.google.dev/gemma) and request the access to the Gemma-7B model. 
 
 ## 2. Requesting model access from Hugging Face
-Once request is approved, use the same email adrress to get the access of the model from HF [here](https://huggingface.co/meta-llama/Llama-2-7b).  
+Once request is approved, use the same email adrress to get the access of the model from HF [here](https://huggingface.co/google/gemma-7b).
 
 Once both requests are approved, follow the below directions.
 
@@ -13,9 +13,9 @@ Once both requests are approved, follow the below directions.
 
 ## 1. Environment preparation
 ```python
-git clone https://github.com/facebookresearch/llama-recipes.git
+git clone https://github.com/Tizzzzy/Law_LLM.git
 
-cd llama-recipes
+cd Law_LLM
 
 pip install git+https://github.com/huggingface/transformers
 
@@ -86,7 +86,7 @@ After get all of the legal data from `case.law` into a folder. In `preprocess` f
    - `PCR_file`: your data path for `PCR` task.
    - `train_file`: where do you wish to store the final training data.
 
-# Finetune the model
+# Finetune the Model
 
 1. In `train` folder, run `train.py`.
    ```bash
@@ -97,5 +97,14 @@ After get all of the legal data from `case.law` into a folder. In `preprocess` f
 
 2. If you want to modify any hyperparameters, feel free to do so.
 
+# Merge and Test the Model
 
-If you like our project, please leave us a star
+1. In `train` folder, run `LawLLM_merge_4bit.ipynb`. This will merge your previously trained checkpoint with `Gemma` model.
+
+2. Notice that the code takes two file paths:
+   - `checkpoint folder`: your trained checkpoint folder.
+   - `output_merged_dir`: where do you wish to store your final merged model.
+  
+3. After you model is ready, simply change the `text` to test the model.
+
+If you like our project, please leave us a star :star:
