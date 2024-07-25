@@ -1,0 +1,19 @@
+3.3 Similar Case Retrieval
+In our Similar Case Retrieval (SCR) framework, we adopt a distinct strategy from our Precedent Case Recommendation (PCR) by employing the BM25 algorithm to identify cases similar to a given legal case, denoted as di, from our comprehensive dataset. 
+Unlike the knowledge graph-based approach used in PCR, BM25 offers a text-centric retrieval mechanism that evaluates the textual relevance between the query case d; 
+and each case in the dataset based on term frequency-inverse document frequency (TF-IDF) principles. 
+This method calculates a relevance score for every case, selecting the one with the highest score as the most similar to di.Score(di,dj) = BM25(d;,dj)(4)where d; 
+represents a candidate case from the dataset and Score(di, di) denotes the calculatedrelevance score between d; 
+
+and d;.
+和d;。
+During the fine-tuning process, we guide the large language model (LLaMa2) with the prompt: 'Below are the details of the legal case. 
+在微调过程中，我们用提示引导大型语言模型(LLaMa2):“以下是法律案例的细节。
+Based on this information, can you find the similar case for this case?' 
+根据这些信息，你能找到类似的案例吗?”
+This instruction, coupled with the input of a specific legal case. 
+这个指令，加上一个具体的法律案例的输入。
+By designating the model's output as the identified similar case, we achieve two key objectives: enhancing the model's performance in accurately retrieving similar cases and embedding a knowledge repository within the model itself. 
+通过将模型的输出指定为识别的类似案例，我们实现了两个关键目标:提高模型在准确检索类似案例方面的性能，并在模型本身中嵌入知识库。
+This dual approach not only refines the model's retrieval accuracy but also empowers it to function independently of an external dataset, enabling users to leverage SCR capabilities even in the absence of immediate access to a comprehensive case database.
+这种双重方法不仅提高了模型的检索精度，而且使其能够独立于外部数据集运行，即使在没有立即访问综合案例数据库的情况下，用户也可以利用SCR功能。
