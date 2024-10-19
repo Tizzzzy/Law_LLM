@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <meta charset="utf-8">
+    <meta name="description"
+          content="LawLLM: Law Large Language Model for the US Legal System">
+    <meta name="keywords" content="Large Language Models, Multitask Learning, Legal System, Natural Language Processing">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LawLLM: Law Large Language Model for the US Legal System</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/icon_fair.svg">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <!-- <div class="navbar-menu">
+          <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+            <a class="navbar-item" href="xxxxx">
+            <span class="icon">
+                <i class="fas fa-home"></i>
+            </span>
+            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More Research
+              </a>
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="https://hypernerf.github.io">
+                  HyperNeRF
+                </a>
+                <a class="navbar-item" href="https://nerfies.github.io">
+                  Nerfies
+                </a>
+                <a class="navbar-item" href="https://latentfusion.github.io">
+                  LatentFusion
+                </a>
+                <a class="navbar-item" href="https://photoshape.github.io">
+                  PhotoShape
+                </a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+    </nav>
+
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title " style="color: hsl(205, 100%, 38%);">LawLLM: Law Large Language Model for the US Legal System</h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=KfIlTroAAAAJ&hl=en">Dong Shu</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://haoranzhao.com/">Haoran Zhao</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=IK9-J_YAAAAJ&hl=en">Xukun Liu</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=TUnj2lIAAAAJ&hl=en">David Demeter</a><sup>1</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=0i-Js2gAAAAJ">Mengnan Du</a><sup>2</sup>,
+                            </span>
+                            <span class="author-block">
+                                <a href="https://scholar.google.com/citations?user=A66WefUAAAAJ&hl=en">Yongfeng Zhang</a><sup>3</sup>,
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>Northwestern University,</span>
+                            <span class="author-block"><sup>2</sup>New Jersey Institute of Technology,</span>
+                            <span class="author-block"><sup>2</sup>Rutgers University</span>
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/pdf/2407.21065"
+                                       class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span>
+                                <!-- PDF Link. -->
+                                <span class="link-block">
+                                    <a href="./static/figs/CIKM-lawllm_pre.pdf"
+                                       class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span>PowerPoint</span>
+                                    </a>
+                                </span>
+                                <!-- Video Link. -->
+                                <!-- <span class="link-block">
+                                  <a href="TBC_video"
+                                     class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-youtube"></i>
+                                    </span>
+                                    <span>Poster</span>
+                                  </a>
+                                </span> -->
+                                <!-- Code Link. -->
+                                <span class="link-block">
+                                    <a href="https://github.com/Tizzzzy/Law_LLM"
+                                       class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+                                <!-- Dataset Link. -->
+                                <!-- <span class="link-block"> -->
+                                <!-- <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                  <span class="icon">
+                                      <i class="far fa-images"></i>
+                                  </span>
+                                  <span>Data</span>
+                                  </a> -->
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Workflow. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-five-fifths">
+                    <!-- <div class="columns is-centered"> -->
+                        <img src="./static/figs/fig1.png" width="50%">
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abstract -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3" style="color: hsl(205, 100%, 38%);">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            In the rapidly evolving field of legal analytics, finding relevant cases and accurately predicting judicial outcomes are challenging because of the complexity of legal language, which often includes specialized terminology, complex syntax, and historical context. Moreover, the subtle distinctions between similar and precedent cases require a deep understanding of legal knowledge. Researchers often conflate these concepts, making it difficult to develop specialized techniques to effectively address these nuanced tasks. In this paper, we introduce the Law Large Language Model (LawLLM), a multi-task model specifically designed for the US legal domain to address these challenges. LawLLM excels at Similar Case Retrieval (SCR), Precedent Case Recommendation (PCR), and Legal Judgment Prediction (LJP).
+                        </p>
+                        <p>
+                            In our paper, we distinguishes between precedent cases and similar cases, providing clarity on the objectives of each task. This clarification enables the future research to develop tailored strategies for those tasks. The experimental results indicate that LawLLM outperformed all baseline models, including the GPT-4 model, across all three tasks. These results highlight LawLLM's robust capabilities in the legal domain. 
+                        </p>
+                        <p>
+                            <b>Keywords:</b> Large Language Models, Multitask Learning, Legal System, Natural Language Processing
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3" style="color: hsl(205, 100%, 38%);">Overview of our LawLLM</h2>
+                    <div class="content has-text-justified">
+
+                        <div class="columns is-centered">
+                            <img src="./static/figs/overview.png" width="100%">
+                        </div>
+                    </div>
+                    <div class="content has-text-justified">
+                        <p>
+                            Our methodological framework is divided into four distinct parts: Data Preprocessing, SCR Processing, PCR Processing, and LJP Processing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3" style="color: hsl(205, 100%, 38%);">
+                        Similar Case Retrieval
+                    </h2>
+                    <div class="content has-text-justified">
+
+                        <div class="columns is-centered">
+                            <img src="./static/figs/scr.png" width="60%">
+                        </div>
+                    </div>
+                    <div class="content has-text-justified">
+                        <p>
+                            LawLLM outperformed the baseline models in all categories. Specifically, it achieved the highest accuracy in top-1, top-3, and top-5 retrieval rates, with scores of 29.8%, 63.2%, and 81.6% respectively. Remarkably, it also demonstrated minimal hallucination, as indicated by the not-found rate of 0.1%
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3" style="color: hsl(205, 100%, 38%);">
+                        Precedent Case Recommendation
+                    </h2>
+                    <div class="content has-text-justified">
+
+                        <div class="columns is-centered">
+                            <img src="./static/figs/pcr.png" width="60%">
+                        </div>
+                    </div>
+                    <div class="content has-text-justified">
+                        <p>
+                            LawLLM model again outperformed other baseline methods. It achieved the best results with a top-1 rate of 31.8%, top-3 rate of 59.7%, and top-5 rate of 83.2%. Additionally, the LawLLM model exhibited an low not-found rate of 0.1%.
+                        </p>
+                        <p>
+                            One notable insight from comparing SCR and PCR results is that most baseline models exhibited a performance drop in the PCR task compared to SCR. For instance, the GPT-4 model achieved scores of 27.4%, 52.6%, 70.8%, 0.5% in SCR top-k and “Not Found” metrics, while in the PCR task, its scores dropped to 26.2%, 51.4%, 69.7% and 0.7%. This decline underscores the greater difficulty of identifying precedent cases compared to similar cases, as models cannot rely solely on textual similarity when determining precedent relationships. Instead, they must consider nuanced factors such as legal relevance. This performance difference reinforces the our previous assertion that precedent cases are distinct from similar cases, emphasizing the importance of distinguishing between the two concepts in the legal domain.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3" style="color: hsl(205, 100%, 38%);">
+                        Legal Judgment Prediction
+                    </h2>
+                    <div class="content has-text-justified">
+
+                        <div class="columns is-centered">
+                            <img src="./static/figs/ljp.png" width="70%">
+                        </div>
+                    </div>
+                    <div class="content has-text-justified">
+                        <p>
+                            LawLLM surpasses all baseline methods in both zero-shot and few-shot scenarios for the LJP task. In the zeroshot scenario, LawLLM achieves an accuracy of 0.636 and an F1 score of 0.591, significantly outperforming the second best model, GPT-4, which scores 0.573 and 0.563 in accuracy and F1, respectively. In the few-shot scenario, LawLLM maintains its superior performance, reaching an accuracy of 0.794 and an F1 score of 0.758.
+                        </p>
+                        <p>
+                            Additionally, all models demonstrate higher performance in the few-shot in-context learning (ICL) scenario compared to the zeroshot setting. For instance, LLaMA2-7b shows an increase from 0.235 to 0.473 in accuracy, and from 0.239 to 0.455 in F1 score. This pattern indicates that all models benefit from incorporating a few ICL examples, which helps them better understand the task.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+
+        </div>
+    </section>
+
+    
+
+    <!-- journal={arXiv preprint arXiv:2408.09757}, -->
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title" style="color: hsl(205, 100%, 38%);">BibTeX</h2>
+            <pre><code>@article{shu2024lawllm,
+    title={LawLLM: Law Large Language Model for the US Legal System},
+    author={Shu, Dong and Zhao, Haoran and Liu, Xukun and Demeter, David and Du, Mengnan and Zhang, Yongfeng},
+    journal={arXiv preprint arXiv:2407.21065},
+    year={2024}
+}</code></pre>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <!-- <div class="content has-text-centered">
+              <a class="icon-link"
+                 href="./static/videos/nerfies_paper.pdf">
+                <i class="fas fa-file-pdf"></i>
+              </a>
+              <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+                <i class="fab fa-github"></i>
+              </a>
+            </div> -->
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        <p>
+                            This website is licensed under a <a rel="license"
+                                                                href="http://creativecommons.org/licenses/by-sa/4.0/">
+                                Creative
+                                Commons Attribution-ShareAlike 4.0 International License
+                            </a>.
+                            We thank the website template from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
